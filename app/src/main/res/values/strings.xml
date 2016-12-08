@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">LocActor</string>
+
+    <string name="lab_start_lat">.¢..«Ü..Å..ª..Ü</string>
+    <string name="lab_start_lon">.¢..«Ü..¼..ª..Ü</string>
+    <string name="lab_speed">.Ç...ª..êµ»Å.ìè.ºÆ.º..è¿..ë..Ü</string>
+    <string name="lab_mockgps">..Ç.É».ÖÜµï..«Ü..ì..Ü</string>
+    <string name="lab_btn_set">.«...«</string>
+    <string name="lab_showwheel">µÿ..ñ.µû..Éæ.¢ÿ</string>
+    <string name="lab_showminimap">µÿ..ñ...Å.£..¢.</string>
+
+    <string name="lab_E">E</string>
+    <string name="lab_S">S</string>
+    <string name="lab_W">W</string>
+    <string name="lab_N">N</string>
+    <string name="lab_P">| |</string>
+</resources>
