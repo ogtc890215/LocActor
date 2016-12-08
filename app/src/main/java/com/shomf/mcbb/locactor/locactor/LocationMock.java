@@ -62,14 +62,14 @@ public class LocationMock {
                 }
                 mLocationManager.setTestProviderEnabled(mProvider, true);
                 mLocationManager.setTestProviderStatus(mProvider, LocationProvider.AVAILABLE, null, System.currentTimeMillis());
-                // µ¿íµï...ì..«.Å».ö¿
+                // æ¨¡æ‹Ÿä½ç½®å¯ç”¨
                 return true;
             } catch (SecurityException e) {
                 String info = e.toString();
                 if(info.contains("permission")){
-                    Toast.makeText(mContext,"µúÇµ.Ñµ¥â.ÖÉ.òè...",Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext,"æ£€æŸ¥æƒé™å•Šäº²",Toast.LENGTH_LONG).show();
                 } else if(info.contains("not allowed")){
-                    Toast.makeText(mContext,"..Ç.Åæ.Çà.Çë.í..çî.Üäµ¥â.ÖÉ.òè...",Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext,"å¼€å‘è€…é€‰é¡¹é‡Œçš„æƒé™å•Šäº²",Toast.LENGTH_LONG).show();
                 }
                 Log.e(TAG,e.toString());
                 e.printStackTrace();
@@ -80,15 +80,15 @@ public class LocationMock {
 
     public void updateLocation(double lat, double lon) {
         try {
-            // µ¿íµï...ì..«..êaddTestProviderµêÉ.è..Üä.ëìµÅÉ..ï..ë
+            // æ¨¡æ‹Ÿä½ç½®ï¼ˆaddTestProvideræˆåŠŸçš„å‰æä¸‹ï¼‰
             Location mockLocation = new Location(mProvider);
-            mockLocation.setLatitude(lat + random.nextInt(5)/1000000.0);  // .....ª..ê..ª..ë
-            mockLocation.setLongitude(lon+ random.nextInt(5)/1000000.0); // ..Å..ª..ê..ª..ë
-            mockLocation.setAltitude(30);  // .½ÿ.¿ï..ê.....ë
-            //mockLocation.setBearing(180);  // µû..Éæ..ê..ª..ë
-            mockLocation.setSpeed(3+random.nextFloat());  //.Ç...ª..ê.../.ºÆ..ë
-            mockLocation.setAccuracy(1.0f);  // .....ª..ê.....ë
-            mockLocation.setTime(new Date().getTime());  // µ£¼.£.µù..ù.
+            mockLocation.setLatitude(lat + random.nextInt(5)/1000000.0);  // ç»´åº¦ï¼ˆåº¦ï¼‰
+            mockLocation.setLongitude(lon+ random.nextInt(5)/1000000.0); // ç»åº¦ï¼ˆåº¦ï¼‰
+            mockLocation.setAltitude(30);  // é«˜ç¨‹ï¼ˆç±³ï¼‰
+            //mockLocation.setBearing(180);  // æ–¹å‘ï¼ˆåº¦ï¼‰
+            mockLocation.setSpeed(3+random.nextFloat());  //é€Ÿåº¦ï¼ˆç±³/ç§’ï¼‰
+            mockLocation.setAccuracy(1.0f);  // ç²¾åº¦ï¼ˆç±³ï¼‰
+            mockLocation.setTime(new Date().getTime());  // æœ¬åœ°æ—¶é—´
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 mockLocation.setElapsedRealtimeNanos(SystemClock.elapsedRealtimeNanos());
             }
@@ -96,8 +96,8 @@ public class LocationMock {
             Log.d(TAG, "updateLocation:" +mockLocation );
         } catch (Exception e) {
             e.printStackTrace();
-            // .ÿ.µ¡ó.ö¿µê..£¿..».....É.íî..ç.¿ï..¡.à..ù¡µ¿íµï...ì..«µêû.Çëµï..à...û..ö.ö¿
-            Toast.makeText(mContext,"µ¢.µû...ì..«.ñ...Ñ" + e,Toast.LENGTH_SHORT).show();
+            // é˜²æ­¢ç”¨æˆ·åœ¨è½¯ä»¶è¿è¡Œè¿‡ç¨‹ä¸­å…³é—­æ¨¡æ‹Ÿä½ç½®æˆ–é€‰æ‹©å…¶ä»–åº”ç”¨
+            Toast.makeText(mContext,"æ›´æ–°ä½ç½®å¤±è´¥" + e,Toast.LENGTH_SHORT).show();
         }
     }
 }

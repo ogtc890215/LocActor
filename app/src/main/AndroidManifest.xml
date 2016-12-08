@@ -8,17 +8,17 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <!--.àü.«..¿ï..Åµëô..Ç..æ..£.ÑùµÄÑ.¡ù-->
+    <!--å…è®¸ç¨‹åºæ‰“å¼€ç½‘ç»œå¥—æ¥å­—-->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--.àü.«..¿ï..Å.«...«.åà..«sd.ìí.Üä.åÖµ¥â.ÖÉ-->
+    <!--å…è®¸ç¨‹åºè®¾ç½®å†…ç½®sdå¡çš„å†™æƒé™-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--.àü.«..¿ï..Å.Ä..Åû..æ..£.è.µÇü-->
+    <!--å…è®¸ç¨‹åºè·å–ç½‘ç»œçŠ¶æ€-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--.àü.«..¿ï..Å.«..ù«WiFi..æ..£..íµü»-->
+    <!--å…è®¸ç¨‹åºè®¿é—®WiFiç½‘ç»œä¿¡æ¯-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--.àü.«..¿ï..Å.»..åÖµëïµ£..è.µÇü.Æî..½...-->
+    <!--å…è®¸ç¨‹åºè¯»å†™æ‰‹æœºçŠ¶æ€å’Œèº«ä»½-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--.àü.«..¿ï..Å.«..ù«CellIDµêûWiFi.â¡.é.µ¥Ñ.Ä..Åû..ù.òÑ.Üä..ì..«-->
+    <!--å…è®¸ç¨‹åºè®¿é—®CellIDæˆ–WiFiçƒ­ç‚¹æ¥è·å–ç²—ç•¥çš„ä½ç½®-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
@@ -27,7 +27,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="93b7c80a0dc9802238856e3a63fc913d">//..Ç.Åæ.Çà.ö..»..Üäkey
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="93b7c80a0dc9802238856e3a63fc913d">//å¼€å‘è€…ç”³è¯·çš„key
         </meta-data>
         <activity android:name=".MainActivity">
             <intent-filter>

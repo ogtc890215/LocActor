@@ -29,10 +29,10 @@ import com.amap.api.maps2d.model.LatLng;
 public class MiniMapService extends Service {
     private static final String TAG = "MockLocation_MiniMap";
 
-    //.«Ü..ëµ.«.è¿.¬ù.Åú..â..Ç
+    //å®šä¹‰æµ®åŠ¨çª—å£å¸ƒå±€
     FrameLayout mFloatLayout;
     WindowManager.LayoutParams wmParams;
-    //.ê¢...µ.«.è¿.¬ù.Åú.«...«..â..Ç.Åéµò..Üä.»...í
+    //åˆ›å»ºæµ®åŠ¨çª—å£è®¾ç½®å¸ƒå±€å‚æ•°çš„å¯¹è±¡
     WindowManager mWindowManager;
     MapView mMapView;
 
@@ -74,31 +74,31 @@ public class MiniMapService extends Service {
 
     private void createFloatView() {
         wmParams = new WindowManager.LayoutParams();
-        //.Ä..Åû.Üäµÿ»WindowManagerImpl.CompatModeWrapper
+        //è·å–çš„æ˜¯WindowManagerImpl.CompatModeWrapper
         mWindowManager = (WindowManager) getApplication().getSystemService(getApplication().WINDOW_SERVICE);
-        //.«...«window type
+        //è®¾ç½®window type
         wmParams.type = WindowManager.LayoutParams.TYPE_PHONE;
-        //.«...«.¢..ëçµá...Å..îµòêµ.£....âîµÖ».ÇÅµÿÄ
+        //è®¾ç½®å›¾ç‰‡æ ¼å¼ï¼Œæ•ˆæœä¸ºèƒŒæ™¯é€æ˜
         wmParams.format = PixelFormat.RGBA_8888;
-        //.«...«µ.«.è¿.¬ù.Åú..ì.Å».üÜ.äª..ê.«..Ä.µôì..£.Öñµ.«.è¿.¬ù.Åú.ñû.Üä.à...û.Å».ºü.¬ù.Åú.Üäµôì..£..ë
+        //è®¾ç½®æµ®åŠ¨çª—å£ä¸å¯èšç„¦ï¼ˆå®ç°æ“ä½œé™¤æµ®åŠ¨çª—å£å¤–çš„å…¶ä»–å¯è§çª—å£çš„æ“ä½œï¼‰
         wmParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        //..âµò.µé¼µ.«.¬ùµÿ..ñ..Üä.ü£.¥á..ì..«.....ª..º..«.í.
+        //è°ƒæ•´æ‚¬æµ®çª—æ˜¾ç¤ºçš„åœé ä½ç½®ä¸ºå·¦ä¾§ç½®é¡¶
         wmParams.gravity = Gravity.LEFT | Gravity.TOP;
-        // ..Ñ..Å..ò..ª..è.ºÆ....Ä..é...î.«...«x.Çüy.ê¥.ºï.Ç...î.¢..»...Ägravity
+        // ä»¥å±å¹•å·¦ä¸Šè§’ä¸ºåŸç‚¹ï¼Œè®¾ç½®xã€yåˆå§‹å€¼ï¼Œç›¸å¯¹äºgravity
         wmParams.x = 0;
         wmParams.y = 0;
 
-        //.«...«µé¼µ.«.¬ù.Åú.ò..«.µò.µì«
+        //è®¾ç½®æ‚¬æµ®çª—å£é•¿å®½æ•°æ®
         wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         wmParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
 
         LayoutInflater inflater = LayoutInflater.from(getApplication());
-        //.Ä..Åûµ.«.è¿.¬ù.Åú.ºå.¢.µëÇ.£¿..â..Ç
+        //è·å–æµ®åŠ¨çª—å£è§†å›¾æ‰€åœ¨å¸ƒå±€
         mFloatLayout = (FrameLayout) inflater.inflate(R.layout.minimap, null);
-        //µ...èámFloatLayout
+        //æ·»åŠ mFloatLayout
         mWindowManager.addView(mFloatLayout, wmParams);
-        //µ.«.è¿.£..¢.
+        //æµ®åŠ¨åœ°å›¾
         mMapView = (MapView) mFloatLayout.findViewById(R.id.map);
         mMapView.onCreate(null);
         mAMap = mMapView.getMap();
@@ -107,10 +107,10 @@ public class MiniMapService extends Service {
             @Override
             public void onMapLoaded() {
                 mAMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                        new LatLng(Util.mLoc.lat,Util.mLoc.lon),//µû..Üä..¡..â.é..¥Éµáç
-                        18, //µû..Üä...µö...º.ê½
-                        5, //..»....ºÆ0..~45....ê..é.¢...Ä.£..¢.µù....0..ë
-                        0  ////.üÅ.ê¬.ºÆ 0~360.. (µ¡ú.îùµû....0)
+                        new LatLng(Util.mLoc.lat,Util.mLoc.lon),//æ–°çš„ä¸­å¿ƒç‚¹åæ ‡
+                        18, //æ–°çš„ç¼©æ”¾çº§åˆ«
+                        5, //ä¿¯ä»°è§’0Â°~45Â°ï¼ˆå‚ç›´ä¸åœ°å›¾æ—¶ä¸º0ï¼‰
+                        0  ////åèˆªè§’ 0~360Â° (æ­£åŒ—æ–¹ä¸º0)
                 )));
             }
         });
@@ -122,30 +122,30 @@ public class MiniMapService extends Service {
                 double lonoff = latLng.longitude - Util.mLoc.lon;
                 Util.move(MiniMapService.this, latoff, lonoff);
                 mAMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                        new LatLng(Util.mLoc.lat,Util.mLoc.lon),//µû..Üä..¡..â.é..¥Éµáç
-                        18, //µû..Üä...µö...º.ê½
-                        5, //..»....ºÆ0..~45....ê..é.¢...Ä.£..¢.µù....0..ë
-                        0  ////.üÅ.ê¬.ºÆ 0~360.. (µ¡ú.îùµû....0)
+                        new LatLng(Util.mLoc.lat,Util.mLoc.lon),//æ–°çš„ä¸­å¿ƒç‚¹åæ ‡
+                        18, //æ–°çš„ç¼©æ”¾çº§åˆ«
+                        5, //ä¿¯ä»°è§’0Â°~45Â°ï¼ˆå‚ç›´ä¸åœ°å›¾æ—¶ä¸º0ï¼‰
+                        0  ////åèˆªè§’ 0~360Â° (æ­£åŒ—æ–¹ä¸º0)
                 )));
             }
         });
 
         mFloatLayout.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        //.«...«.¢æ.É¼µ.«.è¿.¬ù.Åú.Üä.ºªµæ..º..è¿
+        //è®¾ç½®ç›‘å¬æµ®åŠ¨çª—å£çš„è§¦æ‘¸ç§»åŠ¨
         mMapView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                //getRawXµÿ».ºªµæ...ì..«.¢..»...Ä..Å..ò.Üä.¥Éµáç..îgetXµÿ».¢..»...Äµîë.Æ«.Üä.¥Éµáç
+                //getRawXæ˜¯è§¦æ‘¸ä½ç½®ç›¸å¯¹äºå±å¹•çš„åæ ‡ï¼ŒgetXæ˜¯ç›¸å¯¹äºæŒ‰é’®çš„åæ ‡
                 wmParams.x = (int) event.getRawX() - mMapView.getMeasuredWidth()*2 ;
                 Log.i(TAG, "RawX" + event.getRawX());
                 Log.i(TAG, "X" + event.getX());
-                //.çÅ25....è.µÇüµáÅ.Üä.½ÿ..ª
+                //å‡25ä¸ºçŠ¶æ€æ çš„é«˜åº¦
                 wmParams.y = (int) event.getRawY() - mMapView.getMeasuredHeight()*2;
                 Log.i(TAG, "RawY" + event.getRawY());
                 Log.i(TAG, "Y" + event.getY());
-                //.ê.µû.
+                //åˆ·æ–°
                 mWindowManager.updateViewLayout(mFloatLayout, wmParams);
-                return false;  //µ¡ñ.ñä..à.í...ö.¢.false..î.Éª.êÖOnClickListener.Ä..Åû..ì.ê..¢æ.É¼
+                return false;  //æ­¤å¤„å¿…é¡»è¿”å›falseï¼Œå¦åˆ™OnClickListenerè·å–ä¸åˆ°ç›‘å¬
             }
         });
 

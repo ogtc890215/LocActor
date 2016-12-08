@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.os.SystemProperties;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,23 +13,23 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.Toast;
 
 public class WheelService extends Service {
+
     private static final String TAG = "MockLocation_Wheel";
     private static final double NOTMOVE = 0.000000f;
 
     private static final java.text.DecimalFormat DF4 = new java.text.DecimalFormat("#.0000");
     private static final Double DEFAULT_WAY_LEN = 0.01;
     private static final Double DEFAULT_WAY_WIDTH = 0.000004;
-    //.«Ü..ëµ.«.è¿.¬ù.Åú..â..Ç
+    //å®šä¹‰æµ®åŠ¨çª—å£å¸ƒå±€
     LinearLayout mFloatLayout;
     WindowManager.LayoutParams wmParams;
-    //.ê¢...µ.«.è¿.¬ù.Åú.«...«..â..Ç.Åéµò..Üä.»...í
+    //åˆ›å»ºæµ®åŠ¨çª—å£è®¾ç½®å¸ƒå±€å‚æ•°çš„å¯¹è±¡
     WindowManager mWindowManager;
     Button mFloatView;
-    Button mBtnE, mBtnS,mBtnW,mBtnN;
+    Button mBtnE, mBtnS, mBtnW, mBtnN;
 
     private MyRun mRun;
 
@@ -58,34 +57,32 @@ public class WheelService extends Service {
         return null;
     }
 
-
     private void createFloatView() {
         wmParams = new WindowManager.LayoutParams();
-        //.Ä..Åû.Üäµÿ»WindowManagerImpl.CompatModeWrapper
+        //è·å–çš„æ˜¯WindowManagerImpl.CompatModeWrapper
         mWindowManager = (WindowManager) getApplication().getSystemService(getApplication().WINDOW_SERVICE);
-        //.«...«window type
+        //è®¾ç½®window type
         wmParams.type = WindowManager.LayoutParams.TYPE_PHONE;
-        //.«...«.¢..ëçµá...Å..îµòêµ.£....âîµÖ».ÇÅµÿÄ
+        //è®¾ç½®å›¾ç‰‡æ ¼å¼ï¼Œæ•ˆæœä¸ºèƒŒæ™¯é€æ˜
         wmParams.format = PixelFormat.RGBA_8888;
-        //.«...«µ.«.è¿.¬ù.Åú..ì.Å».üÜ.äª..ê.«..Ä.µôì..£.Öñµ.«.è¿.¬ù.Åú.ñû.Üä.à...û.Å».ºü.¬ù.Åú.Üäµôì..£..ë
+        //è®¾ç½®æµ®åŠ¨çª—å£ä¸å¯èšç„¦ï¼ˆå®ç°æ“ä½œé™¤æµ®åŠ¨çª—å£å¤–çš„å…¶ä»–å¯è§çª—å£çš„æ“ä½œï¼‰
         wmParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        //..âµò.µé¼µ.«.¬ùµÿ..ñ..Üä.ü£.¥á..ì..«.....ª..º..«.í.
+        //è°ƒæ•´æ‚¬æµ®çª—æ˜¾ç¤ºçš„åœé ä½ç½®ä¸ºå·¦ä¾§ç½®é¡¶
         wmParams.gravity = Gravity.LEFT | Gravity.TOP;
-        // ..Ñ..Å..ò..ª..è.ºÆ....Ä..é...î.«...«x.Çüy.ê¥.ºï.Ç...î.¢..»...Ägravity
+        // ä»¥å±å¹•å·¦ä¸Šè§’ä¸ºåŸç‚¹ï¼Œè®¾ç½®xã€yåˆå§‹å€¼ï¼Œç›¸å¯¹äºgravity
         wmParams.x = 0;
         wmParams.y = 0;
 
-        //.«...«µé¼µ.«.¬ù.Åú.ò..«.µò.µì«
+        //è®¾ç½®æ‚¬æµ®çª—å£é•¿å®½æ•°æ®
         wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         wmParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-
         LayoutInflater inflater = LayoutInflater.from(getApplication());
-        //.Ä..Åûµ.«.è¿.¬ù.Åú.ºå.¢.µëÇ.£¿..â..Ç
+        //è·å–æµ®åŠ¨çª—å£è§†å›¾æ‰€åœ¨å¸ƒå±€
         mFloatLayout = (LinearLayout) inflater.inflate(R.layout.wheel, null);
-        //µ...èámFloatLayout
+        //æ·»åŠ mFloatLayout
         mWindowManager.addView(mFloatLayout, wmParams);
-        //µ.«.è¿.¬ù.Åúµîë.Æ«
+        //æµ®åŠ¨çª—å£æŒ‰é’®
         mFloatView = (Button) mFloatLayout.findViewById(R.id.btnss);
         mBtnE = (Button) mFloatLayout.findViewById(R.id.btne);
         mBtnS = (Button) mFloatLayout.findViewById(R.id.btns);
@@ -93,24 +90,25 @@ public class WheelService extends Service {
         mBtnN = (Button) mFloatLayout.findViewById(R.id.btnn);
         //mSpeed = (Switch)mFloatLayout.findViewById(R.id.speed) ;
 
-        mFloatLayout.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        mFloatLayout.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         Log.i(TAG, "Width/2--->" + mFloatView.getMeasuredWidth() / 2);
         Log.i(TAG, "Height/2--->" + mFloatView.getMeasuredHeight() / 2);
-        //.«...«.¢æ.É¼µ.«.è¿.¬ù.Åú.Üä.ºªµæ..º..è¿
+        //è®¾ç½®ç›‘å¬æµ®åŠ¨çª—å£çš„è§¦æ‘¸ç§»åŠ¨
         mFloatView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                //getRawXµÿ».ºªµæ...ì..«.¢..»...Ä..Å..ò.Üä.¥Éµáç..îgetXµÿ».¢..»...Äµîë.Æ«.Üä.¥Éµáç
-                wmParams.x = (int) event.getRawX() - mFloatView.getMeasuredWidth()*2 ;
+                //getRawXæ˜¯è§¦æ‘¸ä½ç½®ç›¸å¯¹äºå±å¹•çš„åæ ‡ï¼ŒgetXæ˜¯ç›¸å¯¹äºæŒ‰é’®çš„åæ ‡
+                wmParams.x = (int) event.getRawX() - mFloatView.getMeasuredWidth() * 2;
                 Log.i(TAG, "RawX" + event.getRawX());
                 Log.i(TAG, "X" + event.getX());
-                //.çÅ25....è.µÇüµáÅ.Üä.½ÿ..ª
-                wmParams.y = (int) event.getRawY() - mFloatView.getMeasuredHeight()*2;
+                //å‡25ä¸ºçŠ¶æ€æ çš„é«˜åº¦
+                wmParams.y = (int) event.getRawY() - mFloatView.getMeasuredHeight() * 2;
                 Log.i(TAG, "RawY" + event.getRawY());
                 Log.i(TAG, "Y" + event.getY());
-                //.ê.µû.
+                //åˆ·æ–°
                 mWindowManager.updateViewLayout(mFloatLayout, wmParams);
-                return false;  //µ¡ñ.ñä..à.í...ö.¢.false..î.Éª.êÖOnClickListener.Ä..Åû..ì.ê..¢æ.É¼
+                return false;  //æ­¤å¤„å¿…é¡»è¿”å›falseï¼Œå¦åˆ™OnClickListenerè·å–ä¸åˆ°ç›‘å¬
             }
         });
 
@@ -179,10 +177,11 @@ public class WheelService extends Service {
     }
 
     private static Integer sToI(String s) {
-        Integer i  = 500;
+        Integer i = 500;
         try {
             i = Integer.parseInt(s);
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
         return i;
     }
 
@@ -199,11 +198,12 @@ public class WheelService extends Service {
         public MyRun(int d) {
             direction = d;
         }
+
         @Override
         public void run() {
             double tmpStep = 0.0;
-            while(isRuning) {
-                switch(direction) {
+            while (isRuning) {
+                switch (direction) {
                     case DE:
                         tmpStep = Util.mLoc.speed;
                         Util.move(WheelService.this, NOTMOVE, tmpStep);

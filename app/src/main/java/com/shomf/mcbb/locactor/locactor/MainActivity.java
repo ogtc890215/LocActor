@@ -44,10 +44,10 @@ public class MainActivity extends Activity {
                 Util.setLocationToSharePreference(MainActivity.this, etStartLat.getText().toString(),
                         etStartLon.getText().toString(), etSpeed.getText().toString());
                 mAMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                        new LatLng(Util.mLoc.lat,Util.mLoc.lon),//µû..Üä..¡..â.é..¥Éµáç
-                        15, //µû..Üä...µö...º.ê½
-                        5, //..»....ºÆ0..~45....ê..é.¢...Ä.£..¢.µù....0..ë
-                        0  ////.üÅ.ê¬.ºÆ 0~360.. (µ¡ú.îùµû....0)
+                        new LatLng(Util.mLoc.lat,Util.mLoc.lon),//æ–°çš„ä¸­å¿ƒç‚¹åæ ‡
+                        15, //æ–°çš„ç¼©æ”¾çº§åˆ«
+                        5, //ä¿¯ä»°è§’0Â°~45Â°ï¼ˆå‚ç›´ä¸åœ°å›¾æ—¶ä¸º0ï¼‰
+                        0  ////åèˆªè§’ 0~360Â° (æ­£åŒ—æ–¹ä¸º0)
                 )));
             }
         });
@@ -87,9 +87,9 @@ public class MainActivity extends Activity {
             }
         });
 
-        //.Ä..Åû.£..¢.µÄº.....ò.ö¿
+        //è·å–åœ°å›¾æ§ä»¶å¼•ç”¨
         mMapView = (MapView) findViewById(R.id.map);
-        //.£¿activityµëº.íîonCreateµù.µëº.íîmMapView.onCreate(savedInstanceState)..î.«..Ä..£..¢..ö..æ..æ¿µ£..«í.Éå
+        //åœ¨activityæ‰§è¡ŒonCreateæ—¶æ‰§è¡ŒmMapView.onCreate(savedInstanceState)ï¼Œå®ç°åœ°å›¾ç”Ÿå‘½å‘¨æœŸç®¡ç†
         mMapView.onCreate(savedInstanceState);
         if (mAMap == null) {
             mAMap = mMapView.getMap();
@@ -105,10 +105,10 @@ public class MainActivity extends Activity {
                 @Override
                 public void onMapLoaded() {
                     mAMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                            new LatLng(Util.mLoc.lat,Util.mLoc.lon),//µû..Üä..¡..â.é..¥Éµáç
-                            15, //µû..Üä...µö...º.ê½
-                            5, //..»....ºÆ0..~45....ê..é.¢...Ä.£..¢.µù....0..ë
-                            0  ////.üÅ.ê¬.ºÆ 0~360.. (µ¡ú.îùµû....0)
+                            new LatLng(Util.mLoc.lat,Util.mLoc.lon),//æ–°çš„ä¸­å¿ƒç‚¹åæ ‡
+                            15, //æ–°çš„ç¼©æ”¾çº§åˆ«
+                            5, //ä¿¯ä»°è§’0Â°~45Â°ï¼ˆå‚ç›´ä¸åœ°å›¾æ—¶ä¸º0ï¼‰
+                            0  ////åèˆªè§’ 0~360Â° (æ­£åŒ—æ–¹ä¸º0)
                     )));
                 }
             });
@@ -126,27 +126,27 @@ public class MainActivity extends Activity {
         if (mAMap == null) {
             mAMap = mMapView.getMap();
         }
-        //.£¿activityµëº.íîonResumeµù.µëº.íîmMapView.onResume ()..î.«..Ä..£..¢..ö..æ..æ¿µ£..«í.Éå
+        //åœ¨activityæ‰§è¡ŒonResumeæ—¶æ‰§è¡ŒmMapView.onResume ()ï¼Œå®ç°åœ°å›¾ç”Ÿå‘½å‘¨æœŸç®¡ç†
         mMapView.onResume();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //.£¿activityµëº.íîonDestroyµù.µëº.íîmMapView.onDestroy()..î.«..Ä..£..¢..ö..æ..æ¿µ£..«í.Éå
+        //åœ¨activityæ‰§è¡ŒonDestroyæ—¶æ‰§è¡ŒmMapView.onDestroy()ï¼Œå®ç°åœ°å›¾ç”Ÿå‘½å‘¨æœŸç®¡ç†
         mMapView.onDestroy();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //.£¿activityµëº.íîonPauseµù.µëº.íîmMapView.onPause ()..î.«..Ä..£..¢..ö..æ..æ¿µ£..«í.Éå
+        //åœ¨activityæ‰§è¡ŒonPauseæ—¶æ‰§è¡ŒmMapView.onPause ()ï¼Œå®ç°åœ°å›¾ç”Ÿå‘½å‘¨æœŸç®¡ç†
         mMapView.onPause();
     }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        //.£¿activityµëº.íîonSaveInstanceStateµù.µëº.íîmMapView.onSaveInstanceState (outState)..î.«..Ä..£..¢..ö..æ..æ¿µ£..«í.Éå
+        //åœ¨activityæ‰§è¡ŒonSaveInstanceStateæ—¶æ‰§è¡ŒmMapView.onSaveInstanceState (outState)ï¼Œå®ç°åœ°å›¾ç”Ÿå‘½å‘¨æœŸç®¡ç†
         mMapView.onSaveInstanceState(outState);
     }
 }

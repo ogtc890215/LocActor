@@ -10,7 +10,6 @@ import android.os.IBinder;
 import android.os.Process;
 import android.os.SystemClock;
 import android.util.Log;
-import android.os.SystemProperties;
 
 public class MockLocationService extends Service {
     private static final String TAG = "MockLocation_Service";
@@ -71,9 +70,13 @@ public class MockLocationService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "-------onStartCommand-------------" + intent + flags + "startid:" + startId);
-        Notification notification = new Notification(R.drawable.mockloc, "Mock Location Service Running.", System.currentTimeMillis());
-        notification.setLatestEventInfo(this, "LocActor", "Mock Location Service Running.", PendingIntent.getService(this, 0, intent, 0));
-        startForeground(startId, notification);
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setSmallIcon(R.drawable.mockloc)
+                .setContentTitle("LocActor")
+                .setWhen(System.currentTimeMillis())
+                .setContentText("Mock Location Service Running.")
+                .setContentIntent(PendingIntent.getService(this, 0, intent, 0));
+        startForeground(startId, builder.build());
         parseCommand(intent);
         return START_STICKY;
     }
@@ -89,7 +92,7 @@ public class MockLocationService extends Service {
                 needUpdate = false;
                 Log.d(TAG, "-------onStartCommand-------------CMD:OFF");
             } else {
-                //µ£Ï.ËÌ.ÛΩ.ÁÏ.…ª
+                //ÊúçÂä°Ë¢´ÈáçÂêØ
                 needUpdate = true;
             }
         }
