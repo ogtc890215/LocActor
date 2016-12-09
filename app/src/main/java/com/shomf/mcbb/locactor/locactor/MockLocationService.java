@@ -12,6 +12,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 public class MockLocationService extends Service {
+
     private static final String TAG = "MockLocation_Service";
 
     private LocationManager mLocationManager;
@@ -21,6 +22,7 @@ public class MockLocationService extends Service {
     private boolean isRunning = true;
     private boolean needUpdate = false;
     private double mLastLat, mLastLon;
+    private long mLastUpdateGpsTime;
 
     public MockLocationService() {
         Log.d(TAG, "-------MockLocationService-------------");
@@ -44,7 +46,10 @@ public class MockLocationService extends Service {
                         double tmpLat, tmpLon;
                         tmpLat = Util.mLoc.lat;
                         tmpLon = Util.mLoc.lon;
-                        if (!(double_equal(tmpLat, mLastLat) && double_equal(tmpLon, mLastLon))) {
+                        long now  = System.currentTimeMillis();
+                        boolean force = (now - mLastUpdateGpsTime) > 3000;
+                        if (force || !(double_equal(tmpLat, mLastLat) && double_equal(tmpLon, mLastLon))) {
+                            mLastUpdateGpsTime = now;
                             try {
                                 mGpsMock.updateLocation(tmpLat, tmpLon);
                             } catch (Exception e) {
@@ -103,6 +108,7 @@ public class MockLocationService extends Service {
         super.onDestroy();
         isRunning = false;
         Log.d(TAG, "-------onDestroy-------------");
+        stopForeground(true);
         try {
             mLocationManager.removeTestProvider(mGpsMock.getProvider());
         } catch (Exception ex) {
@@ -115,6 +121,7 @@ public class MockLocationService extends Service {
             mLocationManager.removeTestProvider(mFusedMock.getProvider());
         } catch (Exception ex) {
         }
+
     }
 
     @Override
@@ -123,7 +130,7 @@ public class MockLocationService extends Service {
     }
 
     private boolean double_equal(double a, double b) {
-        double c  = a-b;
+        double c = a - b;
         if (c > -0.000001 && c < 0.000001) {
             return true;
         } else {

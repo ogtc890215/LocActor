@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
                 } else {
                     Intent intent = new Intent(MainActivity.this, MockLocationService.class);
                     intent.putExtra("CMD", "OFF");
-                    MainActivity.this.startService(intent);
+                    MainActivity.this.stopService(intent);
                 }
             }
         });
