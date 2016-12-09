@@ -1,32 +1,29 @@
 package com.shomf.mcbb.locactor.locactor;
 
-import android.app.Service;
-import android.content.Intent;
-import android.graphics.PixelFormat;
-import android.os.IBinder;
-import android.os.SystemClock;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.model.CameraPosition;
 import com.amap.api.maps2d.model.LatLng;
 
+import android.app.Service;
+import android.content.Intent;
+import android.graphics.PixelFormat;
+import android.os.IBinder;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
+
 /**
  * Created by AHao on 2016/12/8.
  */
 
 public class MiniMapService extends Service {
+
     private static final String TAG = "MockLocation_MiniMap";
 
     //定义浮动窗口布局
@@ -65,12 +62,10 @@ public class MiniMapService extends Service {
         Log.d(TAG, "-------onDestroy-------------");
     }
 
-
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
-
 
     private void createFloatView() {
         wmParams = new WindowManager.LayoutParams();
@@ -92,7 +87,6 @@ public class MiniMapService extends Service {
         wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         wmParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-
         LayoutInflater inflater = LayoutInflater.from(getApplication());
         //获取浮动窗口视图所在布局
         mFloatLayout = (FrameLayout) inflater.inflate(R.layout.minimap, null);
@@ -107,7 +101,7 @@ public class MiniMapService extends Service {
             @Override
             public void onMapLoaded() {
                 mAMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                        new LatLng(Util.mLoc.lat,Util.mLoc.lon),//新的中心点坐标
+                        new LatLng(Util.mLoc.lat, Util.mLoc.lon),//新的中心点坐标
                         18, //新的缩放级别
                         5, //俯仰角0°~45°（垂直与地图时为0）
                         0  ////偏航角 0~360° (正北方为0)
@@ -122,7 +116,7 @@ public class MiniMapService extends Service {
                 double lonoff = latLng.longitude - Util.mLoc.lon;
                 Util.move(MiniMapService.this, latoff, lonoff);
                 mAMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                        new LatLng(Util.mLoc.lat,Util.mLoc.lon),//新的中心点坐标
+                        new LatLng(Util.mLoc.lat, Util.mLoc.lon),//新的中心点坐标
                         18, //新的缩放级别
                         5, //俯仰角0°~45°（垂直与地图时为0）
                         0  ////偏航角 0~360° (正北方为0)
@@ -130,17 +124,18 @@ public class MiniMapService extends Service {
             }
         });
 
-        mFloatLayout.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        mFloatLayout.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         //设置监听浮动窗口的触摸移动
         mMapView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 //getRawX是触摸位置相对于屏幕的坐标，getX是相对于按钮的坐标
-                wmParams.x = (int) event.getRawX() - mMapView.getMeasuredWidth()*2 ;
+                wmParams.x = (int) event.getRawX() - mMapView.getMeasuredWidth() * 2;
                 Log.i(TAG, "RawX" + event.getRawX());
                 Log.i(TAG, "X" + event.getX());
                 //减25为状态栏的高度
-                wmParams.y = (int) event.getRawY() - mMapView.getMeasuredHeight()*2;
+                wmParams.y = (int) event.getRawY() - mMapView.getMeasuredHeight() * 2;
                 Log.i(TAG, "RawY" + event.getRawY());
                 Log.i(TAG, "Y" + event.getY());
                 //刷新
@@ -149,6 +144,13 @@ public class MiniMapService extends Service {
             }
         });
 
+        View trigger = mFloatLayout.findViewById(R.id.trigger);
+        trigger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMapView.setVisibility(mMapView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+            }
+        });
     }
 
 }
